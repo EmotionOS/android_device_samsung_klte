@@ -23,10 +23,6 @@ $(call inherit-product-if-exists, vendor/samsung/klte/klte-vendor.mk)
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
-# GPS
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/gps.conf:system/etc/gps.conf
-
 # NFC
 # See https://github.com/CyanogenMod/android_external_libnfc-nci/blob/cm-14.1/halimpl/pn54x/Android.mk#L21
 # for magic values of NXP_CHIP_TYPE.
@@ -39,6 +35,11 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/libnfc-brcm.conf:system/etc/libnfc-brcm.conf \
     $(LOCAL_PATH)/configs/libnfc-nxp.conf:system/etc/libnfc-nxp.conf \
     $(LOCAL_PATH)/configs/nfcee_access.xml:system/etc/nfcee_access.xml
+
+# Variant blobs script
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/releasetools/variant_blobs_hook.sh:install/bin/variant_blobs_hook.sh \
+    device/samsung/klte-common/releasetools/variant_blobs.sh:install/bin/variant_blobs.sh
 
 # common klte
 $(call inherit-product, device/samsung/klte-common/klte.mk)
